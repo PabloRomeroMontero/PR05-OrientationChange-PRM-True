@@ -12,17 +12,14 @@ import java.util.List;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.pedrojoya.pr05.R;
 import es.iessaladillo.pedrojoya.pr05.data.local.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
 import es.iessaladillo.pedrojoya.pr05.utils.ResourcesUtils;
 import es.iessaladillo.pedrojoya.pr05.utils.viewmodel.ViewModelAvatarActivity.ViewModelAvatarActivity;
-import es.iessaladillo.pedrojoya.pr05.utils.viewmodel.main.ViewModelMainActivity;
 
 public class AvatarActivity extends AppCompatActivity {
-    public static final String AVATAR = "EXTRA_AVATAR";
     private ViewModelAvatarActivity viewModel;
     private List<Avatar> listCat;
     private Avatar avatarIntent;
@@ -54,8 +51,8 @@ public class AvatarActivity extends AppCompatActivity {
     private void getIntentData() {
         Intent intent = getIntent();
         if (intent != null) {
-            if (intent.hasExtra(AVATAR)) {
-                avatarIntent = intent.getParcelableExtra(AVATAR);
+            if (intent.hasExtra(EXTRA_AVATAR)) {
+                avatarIntent = intent.getParcelableExtra(EXTRA_AVATAR);
             }
         }
     }
@@ -64,7 +61,7 @@ public class AvatarActivity extends AppCompatActivity {
         listCat = Database.getInstance().queryAvatars();
         viewModel= ViewModelProviders.of(this)
                 .get(ViewModelAvatarActivity.class);
-        viewModel.changeAvatar(avatarIntent.getId());
+
 
         imgAvatar1 = ActivityCompat.requireViewById(this, R.id.imgAvatar1);
         imgAvatar2 = ActivityCompat.requireViewById(this, R.id.imgAvatar2);
@@ -82,6 +79,7 @@ public class AvatarActivity extends AppCompatActivity {
 
 
         setAvatarCats();
+        viewModel.changeAvatar(avatarIntent.getId());
         selectImageView(null,checkImgView(viewModel.getAvatar()));
 
         imgAvatar1.setOnClickListener(v -> clickAvatar(imgAvatar1,0));
@@ -93,13 +91,14 @@ public class AvatarActivity extends AppCompatActivity {
     }
 
     private void clickAvatar(ImageView imgView,int position){
-        selectImageView(checkImgView(viewModel.getAvatar()),imgView);
         viewModel.changeAvatar(listCat.get(position).getId());
+        selectImageView(checkImgView(viewModel.getAvatar()),imgView);
+
     }
 
     private void imgSend() {
         Intent resultado = new Intent();
-        resultado.putExtra(AVATAR, viewModel.getAvatar());
+        resultado.putExtra(EXTRA_AVATAR, viewModel.getAvatar());
         setResult(RESULT_OK, resultado);
         finish();
     }

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         });
         imgAvatar.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AvatarActivity.class);
-            intent.putExtra(AvatarActivity.AVATAR, (Parcelable) avatar);
+            intent.putExtra(AvatarActivity.EXTRA_AVATAR, (Parcelable) avatar);
             startActivityForResult(intent, RC_OTRA);
         });
 
@@ -242,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == RC_OTRA) {
-            if (data != null && data.hasExtra(AvatarActivity.AVATAR)) {
-                avatar = data.getParcelableExtra(AvatarActivity.AVATAR);
+            if (data != null && data.hasExtra(AvatarActivity.EXTRA_AVATAR)) {
+                avatar = data.getParcelableExtra(AvatarActivity.EXTRA_AVATAR);
                 changeAvatar(avatar);
             }
         }

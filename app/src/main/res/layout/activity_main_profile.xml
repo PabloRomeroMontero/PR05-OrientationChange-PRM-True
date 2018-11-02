@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/profile_marginStart_txtEmail"
         android:layout_marginEnd="@dimen/profile_marginEnd_txtEmail"
+        android:nextFocusForward="@id/txtPhonenumber"
         android:ems="10"
         android:hint="@string/profile_hint_email"
         android:inputType="textWebEmailAddress"
