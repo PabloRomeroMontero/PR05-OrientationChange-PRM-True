@@ -23,7 +23,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
@@ -42,13 +41,13 @@ public class MainActivityRotationTest {
 
     @Test
     public void shouldHaveSameAvatarAfterRotation() {
-        onView(withId(R.id.imgAvatar)).perform(click());
+        onView(withId(R.id.imgAvatarMain)).perform(click());
         // Perform click on AvatarActivity to send result and finish.
         onView(withId(R.id.imgAvatar2)).perform(click());
         onView(withId(R.id.mnuSelect)).perform(click());
         Rotation.rotateScreen(testRule.getActivity());
         // Check result set to views.
-        onView(withId(R.id.imgAvatar)).check(matches(withTagValue(equalTo(R.drawable.cat2))));
+        onView(withId(R.id.imgAvatarMain)).check(matches(withTagValue(equalTo(R.drawable.cat2))));
         onView(withId(R.id.lblAvatar)).check(
                 matches(withText(testRule.getActivity().getString(R.string.avatar2_name))));
     }

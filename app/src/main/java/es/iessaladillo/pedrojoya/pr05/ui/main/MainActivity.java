@@ -1,7 +1,6 @@
 package es.iessaladillo.pedrojoya.pr05.ui.main;
 
 import android.app.SearchManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,13 +9,11 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,17 +24,19 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.pedrojoya.pr05.R;
-import es.iessaladillo.pedrojoya.pr05.data.local.Database;
 import es.iessaladillo.pedrojoya.pr05.data.local.model.Avatar;
 import es.iessaladillo.pedrojoya.pr05.ui.avatar.AvatarActivity;
 import es.iessaladillo.pedrojoya.pr05.utils.ValidationUtils;
+import es.iessaladillo.pedrojoya.pr05.utils.viewmodel.main.ViewModelMainActivity;
 
 import static com.google.android.material.snackbar.Snackbar.LENGTH_SHORT;
 
 @SuppressWarnings("WeakerAccess")
 public class MainActivity extends AppCompatActivity {
     private static final int RC_OTRA = 100;
+    private ViewModelMainActivity viewModel;
     private Avatar avatar;
     private EditText txtWeb;
     private EditText txtName;
@@ -60,12 +59,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModel = ViewModelProviders.of(this)
+                .get(ViewModelMainActivity.class);
         initView();
-        // TODO
     }
 
     private void initView() {
-        avatar = Database.getInstance().getDefaultAvatar();
+        avatar = viewModel.getAvatar();
         txtWeb = ActivityCompat.requireViewById(this, R.id.txtWeb);
         txtName = ActivityCompat.requireViewById(this, R.id.txtName);
         txtAddress = ActivityCompat.requireViewById(this, R.id.txtAddress);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         imgAddress = ActivityCompat.requireViewById(this, R.id.imgAddress);
         imgWeb = ActivityCompat.requireViewById(this, R.id.imgWeb);
         imgEmail = ActivityCompat.requireViewById(this, R.id.imgEmail);
-        imgAvatar = ActivityCompat.requireViewById(this, R.id.imgAvatar);
+        imgAvatar = ActivityCompat.requireViewById(this, R.id.imgAvatarMain);
         imgPhoneNumber = ActivityCompat.requireViewById(this, R.id.imgPhonenumber);
         changeAvatar(avatar);
 
@@ -303,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
         imgAvatar.setImageResource(avatar.getImageResId());
         lblAvatar.setText(avatar.getName());
         imgAvatar.setTag(avatar.getImageResId());
+        viewModel.changeAvatar(avatar.getId());
     }
 
 

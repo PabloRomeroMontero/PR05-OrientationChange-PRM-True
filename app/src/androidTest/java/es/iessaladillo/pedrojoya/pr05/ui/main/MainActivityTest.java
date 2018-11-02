@@ -61,7 +61,7 @@ public class MainActivityTest {
     @Test
     public void shouldAvatarHasDefaultOneInitially() {
         Avatar avatar = Database.getInstance().getDefaultAvatar();
-        onView(withId(R.id.imgAvatar)).check(
+        onView(withId(R.id.imgAvatarMain)).check(
                 matches(withTagValue(equalTo(avatar.getImageResId()))));
         onView(withId(R.id.lblAvatar)).check(matches(withText(avatar.getName())));
     }

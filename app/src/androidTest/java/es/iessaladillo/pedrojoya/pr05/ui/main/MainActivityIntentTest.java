@@ -87,7 +87,7 @@ public class MainActivityIntentTest {
 
     @Test
     public void shouldAvatarSendIntent() {
-        onView(withId(R.id.imgAvatar)).perform(click());
+        onView(withId(R.id.imgAvatarMain)).perform(click());
         // Check sending intent
         intended(allOf(hasComponent(AvatarActivity.class.getName()),
                 hasExtra(AvatarActivity.EXTRA_AVATAR, Database.getInstance().queryAvatar(1))));
@@ -103,9 +103,9 @@ public class MainActivityIntentTest {
         // We simulate the result intent.
         intending(hasComponent(AvatarActivity.class.getName())).respondWith(result);
 
-        onView(withId(R.id.imgAvatar)).perform(click());
+        onView(withId(R.id.imgAvatarMain)).perform(click());
         // Check result set to views.
-        onView(withId(R.id.imgAvatar)).check(matches(withTagValue(equalTo(R.drawable.cat2))));
+        onView(withId(R.id.imgAvatarMain)).check(matches(withTagValue(equalTo(R.drawable.cat2))));
         onView(withId(R.id.lblAvatar)).check(
                 matches(withText(testRule.getActivity().getString(R.string.avatar2_name))));
     }

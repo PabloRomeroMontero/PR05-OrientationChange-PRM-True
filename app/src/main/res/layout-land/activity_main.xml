@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/imgAvatar"
+        android:id="@+id/imgAvatarMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgAvatar"
+        app:layout_constraintStart_toEndOf="@+id/imgAvatarMain"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_weight="2"/>
 
@@ -36,11 +36,11 @@
         android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
-        app:layout_constraintEnd_toEndOf="@+id/imgAvatar"
+        app:layout_constraintBottom_toBottomOf="@+id/imgAvatarMain"
+        app:layout_constraintEnd_toEndOf="@+id/imgAvatarMain"
         app:layout_constraintHorizontal_bias="0.836"
-        app:layout_constraintStart_toStartOf="@+id/imgAvatar"
-        app:layout_constraintTop_toTopOf="@+id/imgAvatar"
+        app:layout_constraintStart_toStartOf="@+id/imgAvatarMain"
+        app:layout_constraintTop_toTopOf="@+id/imgAvatarMain"
         app:layout_constraintVertical_bias="0.837"
         app:layout_constraintHorizontal_weight="1"/>
 
